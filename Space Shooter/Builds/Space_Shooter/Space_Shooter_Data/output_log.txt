@@ -19,13 +19,19 @@ Platform assembly: C:\Users\Daniel3\Desktop\Unity\Space Shooter\Space Shooter\Bu
 Loading C:\Users\Daniel3\Desktop\Unity\Space Shooter\Space Shooter\Builds\Space_Shooter\Space_Shooter_Data\Managed\UnityEngine.Timeline.dll into Unity Child Domain
 Platform assembly: C:\Users\Daniel3\Desktop\Unity\Space Shooter\Space Shooter\Builds\Space_Shooter\Space_Shooter_Data\Managed\System.dll (this message is harmless)
 Platform assembly: C:\Users\Daniel3\Desktop\Unity\Space Shooter\Space Shooter\Builds\Space_Shooter\Space_Shooter_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.025 seconds
+- Completed reload, in  0.018 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.761570 ms
+UnloadTime: 0.745014 ms
 Setting up 4 worker threads for Enlighten.
-  Thread -> id: 250c -> priority: 1 
-  Thread -> id: 2c7c -> priority: 1 
-  Thread -> id: 3c3c -> priority: 1 
-  Thread -> id: 3f60 -> priority: 1 
+  Thread -> id: 48d8 -> priority: 1 
+  Thread -> id: 1f24 -> priority: 1 
+  Thread -> id: 18f0 -> priority: 1 
+  Thread -> id: 4084 -> priority: 1 
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.269860 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 436.
+Total: 0.192048 ms (FindLiveObjects: 0.011865 ms CreateObjectMapping: 0.011865 ms MarkObjects: 0.164454 ms  DeleteObjects: 0.002759 ms)
+
