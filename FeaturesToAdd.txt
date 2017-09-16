@@ -1,0 +1,18 @@
+- Remove possibility to kill enemies before seing them
+- New waves (~30)
+- New enemies
+- Lives (health)
+- Power-Ups droped from enemy ships.
+- Boss waves
+
+
+- Best results saved (score board) 
+- Checkpoints
+- Name insertation
+- Menu
+- Mobile compatable 
+- Settings
+- Special effects (camera shake)
+- Ship development (shop, upgrades (trees of choice) )
+- Ship modele + damaged effect seeable
+- Special abilities
