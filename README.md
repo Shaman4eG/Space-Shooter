@@ -1,4 +1,4 @@
-Space Shooter
+<h1> Space Shooter </h1>
 
 
 Simple arcade-style pseudo-2D space shooter game.   
