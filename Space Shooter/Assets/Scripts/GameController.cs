@@ -30,9 +30,12 @@ public class GameController : MonoBehaviour
     public GUIText startText;
     public GUIText waveNumberText;
 
+    private const float rateOfAliveHazardsCounting = 0.3f;
+
     private bool gameOver;
     private bool restartAllowed;
     private int score;
+    private int numberOfAliveHazards;
 
 
     void Awake()
@@ -52,8 +55,14 @@ public class GameController : MonoBehaviour
 
         score = 0;
         UpdateScore();
+
+        numberOfAliveHazards = 0;
+
         StartCoroutine(SpawnWaves());
+        StartCoroutine(CountAliveHazards());
     }
+
+
 
     void Update()
     {
@@ -71,37 +80,75 @@ public class GameController : MonoBehaviour
     IEnumerator SpawnWaves()
     {
         List<GameObject> waveGroup;
+
         startText.text = "Get Ready!";
         yield return new WaitForSeconds(startWait / 2);
         startText.text = "";
-
-        for (int wavesLeft = numberOfWaves; wavesLeft > 0; wavesLeft--) 
+        
+        for (int wavesLeft = numberOfWaves; wavesLeft > 0; wavesLeft--)
         {
             waveNumberText.text = "Wave " + (waveNumber + 1);
             yield return new WaitForSeconds(startWait / 2);
             waveNumberText.text = "";
 
             waveGroup = FormWave();
+            numberOfAliveHazards = waveGroup.Count;
             while (waveGroup.Count > 0)
             {
                 InstantiateHazard(waveGroup);
                 yield return new WaitForSeconds(spawnWait[waveNumber]);
-                if (gameOver) break;
+                if (gameOver)
+                {
+                    StartCoroutine(RestartPreparation());
+                    break;
+                }
             }
 
-            if (gameOver)
+            // When wave is fully spawned, we divide next waveWait for 1-second parts,
+            // so after each second we can check if player was killed to provide fast restart.
+            // If all hazards are killed, we start next wave with only 1 second delay.
+            for (int i = (int)waveWait[waveNumber]; i > 0; i--)
             {
-                yield return new WaitForSeconds(restartTextShownWait);
-                restartText.text = "Press 'R' for Restart";
-                restartAllowed = true;
-                break;
+                if (gameOver)
+                {
+                    StartCoroutine(RestartPreparation());
+                    break;
+                }
+                if (numberOfAliveHazards == 0) i = 0;
+                yield return new WaitForSeconds(1);
             }
-
-            yield return new WaitForSeconds(waveWait[waveNumber]);
+            if (gameOver) break;
 
             waveNumber++;
         }
     }
+
+    IEnumerator RestartPreparation()
+    {
+        yield return new WaitForSeconds(restartTextShownWait);
+        restartText.text = "Press 'R' for Restart";
+        restartAllowed = true;
+    }
+
+    IEnumerator CountAliveHazards()
+    {
+        GameObject[] aliveHazards;
+
+        while (!gameOver)
+        {
+            aliveHazards = GameObject.FindGameObjectsWithTag("Enemy");
+
+            if (aliveHazards != null &&
+                aliveHazards.Length != 0)
+            {
+                numberOfAliveHazards = aliveHazards.Length;
+            }
+            else numberOfAliveHazards = 0;
+
+            yield return new WaitForSeconds(rateOfAliveHazardsCounting);
+        }
+    }
+
 
     /// <summary>
     /// Creates wave based on wave number. Wave info given in inspector.
