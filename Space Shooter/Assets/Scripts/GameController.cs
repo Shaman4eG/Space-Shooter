@@ -62,8 +62,6 @@ public class GameController : MonoBehaviour
         StartCoroutine(CountAliveHazards());
     }
 
-
-
     void Update()
     {
         if (gameOver) PromptRestart();
@@ -76,6 +74,8 @@ public class GameController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+
+
 
     IEnumerator SpawnWaves()
     {
