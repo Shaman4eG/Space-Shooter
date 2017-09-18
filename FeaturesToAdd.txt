@@ -16,3 +16,4 @@
 - Ship modele + damaged effect seeable
 - Special abilities
 - Staying too long to right will cause burn and staying to long to left border will cause freezing
+- Achievements
